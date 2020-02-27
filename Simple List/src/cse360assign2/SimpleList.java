@@ -10,8 +10,8 @@
  * 
  * 	When integers are added, the contents of the SimpleList are shifted to the
  * right, to the next higher index value, and the new integer is inserted into
- * index 0. The count is then incremented. If the Simple List is full when a
- * new integer is being added, the size of Simple List is increased by 50%
+ * index 0. The count is then incremented. If the SimpleList is full when a
+ * new integer is being added, the size of the SimpleList is increased by 50%
  * before inserting a new integer. The count is then incremented.
  * 
  * 	When integers are removed, the search method finds the integer in the
@@ -20,24 +20,34 @@
  * shifted to the left, to the next lower index value, starting from that index
  * from the search method. The integer is essentially overwritten. After the
  * integer has been removed, if there is more than 25% of unused space in the
- * Simple List, then the size of the Simple List is decreased by 25%. If the
+ * SimpleList, then the size of the SimpleList is decreased by 25%. If the
  * queried integer is not found in the SimpleList, which the search method
  * returns a -1, the SimpleList is not modified and the remove method exits.
  * 
  *	The toString method returns the SimpleList as a String. The String returned
  * is the integers in the SimpleList separated by a space. However, the last
  * integer in the String does not have a space after it.
+ * 
+ *  When integers are appended, they are appended to the end of the SimpleList.
+ * If the SimpleList is full when a new integer is being appended, the size of
+ * the SimpleList is increased by 50% before appending a new integer. The count
+ * is then incremented.
+ * 
+ *  The first method simply returns the first element in the SimpleList at
+ * index 0.
+ * 
+ *  The last method simply returns the last element in the SimpleList.
  */
 
 package cse360assign2;
 
 public class SimpleList {
 	
-	final int DEFAULT_SIZE = 10;
-	final int SMALLEST_SIZE = 1;
-	final float INCREASE_SIZE = 1.5f;
-	final float DECREASE_SIZE = 0.75f;
-	final float EMPTY_THRESHOLD = 0.25f;
+	final private int DEFAULT_SIZE = 10;
+	final private int SMALLEST_SIZE = 1;
+	final private float INCREASE_SIZE = 1.5f;
+	final private float DECREASE_SIZE = 0.75f;
+	final private float EMPTY_THRESHOLD = 0.25f;
 	
 	private int[] list;
 	private int count;
@@ -150,5 +160,61 @@ public class SimpleList {
 				index = iterate;
 		
 		return index;
+	}
+	
+	/**
+	 * Append an element to the end of the list. If the list is full, then the
+	 * list is copied over to a new list that is 50% bigger in size.
+	 * 
+	 * @param element	the integer to be added to the SimpleList
+	 */
+	public void append(int element) {
+		if (count == list.length) {
+			int[] tempList = new int[list.length];
+			
+			for (int iterate = 0; iterate < list.length; iterate++)
+				tempList[iterate] = list[iterate];
+			
+			list = new int[(int) (list.length * INCREASE_SIZE)];
+			
+			for (int iterate = 0; iterate < tempList.length; iterate++)
+				list[iterate] = tempList[iterate];
+		}
+		
+		list[count] = element;
+		++count;
+	}
+	
+	/**
+	 * Gets the first element of the SimpleList.
+	 * 
+	 * @return	the first element of the list
+	 */
+	public int first() {
+		if (count == 0)
+			return -1;
+		else
+			return list[0];
+	}
+	
+	/**
+	 * Gets the last element of the SimpleList.
+	 * 
+	 * @return	the last element of the list
+	 */
+	public int last() {
+		if (count == 0)
+			return -1;
+		else
+			return list[count - 1];
+	}
+	
+	/**
+	 * Gets the current number of possilbe locations in the SimpleList.
+	 * 
+	 * @return	the size of the list
+	 */
+	public int size() {
+		return list.length;
 	}
 }
