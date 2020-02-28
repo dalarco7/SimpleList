@@ -34,9 +34,9 @@
  * is then incremented.
  * 
  *  The first method simply returns the first element in the SimpleList at
- * index 0.
- * 
- *  The last method simply returns the last element in the SimpleList.
+ * index 0. The last method simply returns the last element in the SimpleList.
+ * Finally, the size method returns the number of possible locations in the
+ * SimpleList.
  */
 
 package cse360assign2;
@@ -188,7 +188,7 @@ public class SimpleList {
 	/**
 	 * Gets the first element of the SimpleList.
 	 * 
-	 * @return	the first element of the list
+	 * @return	the first integer in SimpleList
 	 */
 	public int first() {
 		if (count == 0)
@@ -200,7 +200,7 @@ public class SimpleList {
 	/**
 	 * Gets the last element of the SimpleList.
 	 * 
-	 * @return	the last element of the list
+	 * @return	the last integer in SimpleList
 	 */
 	public int last() {
 		if (count == 0)
@@ -212,7 +212,7 @@ public class SimpleList {
 	/**
 	 * Gets the current number of possilbe locations in the SimpleList.
 	 * 
-	 * @return	the size of the list
+	 * @return	the size of the SimpleList
 	 */
 	public int size() {
 		return list.length;
